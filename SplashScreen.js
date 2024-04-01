@@ -1,3 +1,4 @@
+// * This serves as a simple onboarding screen
 import React, { useEffect, useRef } from 'react';
 import { View, Animated, StyleSheet } from 'react-native';
 
@@ -12,7 +13,7 @@ const SplashScreen = ({ navigation }) => {
       // Animation for the first image fading in
       Animated.timing(opacityValue1, {
         toValue: 1,
-        duration: 2000,
+        duration: 1000,
         useNativeDriver: true,
       }),
       // Animation for the first image fading out
@@ -24,7 +25,7 @@ const SplashScreen = ({ navigation }) => {
       // Animation for the second image fading in
       Animated.timing(opacityValue2, {
         toValue: 1,
-        duration: 2000,
+        duration: 1000,
         useNativeDriver: true,
       }),
       // Animation for the second image fading out
@@ -48,7 +49,7 @@ const SplashScreen = ({ navigation }) => {
       <View style={styles.background}>
         {/* First animated image */}
         <Animated.Image
-          source={require('./assets/vLogo.png')}
+          source={require('./assets/home3.jpg')}
           style={[styles.backgroundImage, { opacity: opacityValue1 }]}
           resizeMode="contain"
         />
@@ -56,8 +57,8 @@ const SplashScreen = ({ navigation }) => {
 
       {/* Second animated image */}
       <Animated.Image
-        source={require('./assets/hLogo.png')}
-        style={[styles.image, { opacity: opacityValue2 }]}
+        source={require('./assets/home1.jpg')}
+        style={[styles.backgroundImage, { opacity: opacityValue2 }]}
         resizeMode="contain"
       />
     </View>
@@ -70,16 +71,17 @@ const styles = StyleSheet.create({
       flex: 1,
       alignItems: 'center',
       justifyContent: 'center',
+      backgroundColor: '#fff',
     },
     background: {
       ...StyleSheet.absoluteFillObject,
-      backgroundColor: '#283d3b', // Background color
+      backgroundColor: '#fff', // Background color
       alignItems: 'center', // Center horizontally
       justifyContent: 'center', // Center vertically
     },
     backgroundImage: {
-      width: 150, // Adjust the width of the first image
-      height: 150, // Adjust the height of the first image
+      width: '100%', // Adjust the width of the first image
+      height: '100%', // Adjust the height of the first image
     },
     image: {
       width: 200,

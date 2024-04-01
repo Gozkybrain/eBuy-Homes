@@ -17,10 +17,9 @@ web-build/
 *.mobileprovision
 
 # Test files
-test.html
-test2.html
-testjsx.html
-testingjsx.html
+test.js
+explores/
+authentications/
 
 
 # Metro
