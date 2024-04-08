@@ -18,8 +18,10 @@ web-build/
 
 # Test files
 test.js
-explores/
-authentications/
+explore/
+authentication/
+AuthMe/
+firebaseConfig.js
 
 
 # Metro

@@ -1,7 +1,7 @@
 # eBuy Property Listing
 eBuy is a Real Estate Broker Startup, and this is the first version of the proposed eBuy Mobile Application and it is aimed at simply listing valid and available housing properties. `Note that the data provided in this version of the public app does not point to any real property, but are made up for presentation purpose.`
 
-The app is a simple starter point both for developers and users alike, no authentication needed!
+The app is a simple starter point both for developers and users alike, only simple firebase authentication needed.
 
 The app simply has navigation and search bars that help you find property from search results.
 
@@ -31,4 +31,6 @@ When a property is selected, the screen opens up with all the property details a
 
 ## Developer Guide
 The project has been documented such that it can be understood by any level of developer as each component has been carefully commented, it should be a piece of cake for future management.
+
+For Authenticating with Firebase, I have also provided a [Simple YouTube Guide to this regard](https://www.youtube.com/watch?v=MGBfr3WwIyw), I have commented my codes such that anyone can work with this repo as a guide.
 

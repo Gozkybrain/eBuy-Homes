@@ -1,34 +1,38 @@
-// * This serves as a simple onboarding screen
 import React, { useEffect, useRef } from 'react';
-import { View, Animated, StyleSheet } from 'react-native';
+import { View, Animated, StyleSheet, Image } from 'react-native';
+import { LinearGradient } from 'expo-linear-gradient';
 
+/**
+ ** SplashScreen component renders an initial screen with fading animations
+ ** before navigating to the authentication screen ('GetAuth').
+ **/
 const SplashScreen = ({ navigation }) => {
-  // Define animated values for the opacity of the images
+  // Define animated values for opacity of the two images
   const opacityValue1 = useRef(new Animated.Value(0)).current;
   const opacityValue2 = useRef(new Animated.Value(0)).current;
 
   useEffect(() => {
-    // Define the sequence of animations
+    // Define a sequence of animations for the splash screen
     const sequenceAnimation = Animated.sequence([
-      // Animation for the first image fading in
+      // Fade in the first image
       Animated.timing(opacityValue1, {
         toValue: 1,
         duration: 1000,
         useNativeDriver: true,
       }),
-      // Animation for the first image fading out
+      // Fade out the first image
       Animated.timing(opacityValue1, {
         toValue: 0,
         duration: 2000,
         useNativeDriver: true,
       }),
-      // Animation for the second image fading in
+      // Fade in the second image
       Animated.timing(opacityValue2, {
         toValue: 1,
         duration: 1000,
         useNativeDriver: true,
       }),
-      // Animation for the second image fading out
+      // Fade out the second image
       Animated.timing(opacityValue2, {
         toValue: 0,
         duration: 2000,
@@ -38,16 +42,24 @@ const SplashScreen = ({ navigation }) => {
 
     // Start the sequence of animations
     sequenceAnimation.start(() => {
-      // Navigate to the next screen after animations complete
-      navigation.replace('HomeScreen');
+      // After animations complete, navigate to the authentication screen
+      navigation.replace('GetAuth');
     });
-  }, []);
+  }, []); // Empty dependency array ensures this effect runs only once on component mount
 
+  // Render the SplashScreen component with a linear gradient background
   return (
-    <View style={styles.container}>
-      {/* Background color */}
+    <LinearGradient
+      colors={['#ffffff', '#3498db']} // Gradient colors from white to blue
+      locations={[0.7, 1]} // Set the blue color to start appearing around 30% down the screen
+      style={styles.container} // Style for the gradient container
+    >
+       {/* Logo at top left */}
+       <Image source={require('./assets/logo.png')} style={styles.logo} />
+
+      {/* Background container for animated images */}
       <View style={styles.background}>
-        {/* First animated image */}
+        {/* Animated first image with opacity controlled by opacityValue1 */}
         <Animated.Image
           source={require('./assets/home3.jpg')}
           style={[styles.backgroundImage, { opacity: opacityValue1 }]}
@@ -55,44 +67,40 @@ const SplashScreen = ({ navigation }) => {
         />
       </View>
 
-      {/* Second animated image */}
+      {/* Animated second image with opacity controlled by opacityValue2 */}
       <Animated.Image
-        source={require('./assets/home1.jpg')}
+        source={require('./assets/home2.jpg')}
         style={[styles.backgroundImage, { opacity: opacityValue2 }]}
         resizeMode="contain"
       />
-    </View>
+    </LinearGradient>
   );
 };
 
 // Stylesheet for SplashScreen component
 const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      alignItems: 'center',
-      justifyContent: 'center',
-      backgroundColor: '#fff',
-    },
-    background: {
-      ...StyleSheet.absoluteFillObject,
-      backgroundColor: '#fff', // Background color
-      alignItems: 'center', // Center horizontally
-      justifyContent: 'center', // Center vertically
-    },
-    backgroundImage: {
-      width: '100%', // Adjust the width of the first image
-      height: '100%', // Adjust the height of the first image
-    },
-    image: {
-      width: 200,
-      height: 200,
-      marginBottom: 20,
-    },
-    animatedImage: {
-      width: 200,
-      height: 200,
-      marginBottom: 20,
-    },
-  });
-  
+  container: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  logo: {
+    position: 'absolute',
+    top: 40,
+    right: 20,
+    width: 80,
+    height: 80,
+    resizeMode: 'contain',
+  },
+  background: {
+    ...StyleSheet.absoluteFillObject, // Fill the entire screen
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  backgroundImage: {
+    width: '100%', // Take up full width of the container
+    height: '100%', // Take up full height of the container
+  },
+});
+
 export default SplashScreen;
