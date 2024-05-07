@@ -1,128 +1,191 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, Image, TouchableOpacity, TextInput } from 'react-native';
+import { View, Text, StyleSheet, Image, TouchableOpacity, Alert, ActivityIndicator } from 'react-native';
+import SelectDropdown from 'react-native-select-dropdown';
 
 const DefaultHome = ({ navigation }) => {
-// ==   no logic needed here ==
+  const [selectedType, setSelectedType] = useState('');
+  const [selectedLocation, setSelectedLocation] = useState('');
+  const [searchResults, setSearchResults] = useState([]);
+  const [loading, setLoading] = useState(false); // State to track loading status
 
-    return (
-        <View style={styles.container}>
-            {/* Background image */}
-            <Image
-                source={require('./assets/girl.png')}
-                style={styles.backgroundImage}
-            />
+  const handleSearch = () => {
+    let constructedQuery = '';
 
-            {/* Black overlay */}
-            <View style={styles.overlay}></View>
+    if (selectedType && selectedLocation) {
+      constructedQuery = `${selectedType}/${selectedLocation}`;
+    } else {
+      if (selectedType) {
+        constructedQuery = `type/${selectedType}/`;
+      }
+      if (selectedLocation) {
+        constructedQuery = `location/${selectedLocation}/`;
+      }
+    }
 
-            {/* Header section */}
-            <View style={styles.header}>
-                <View style={styles.logoContainer}>
-                    <Image source={require('./assets/myLogo.png')} style={styles.logo} />
-                </View>
-            </View>
+    if (!selectedType && !selectedLocation) {
+      Alert.alert('Error', 'Please select a property type or location.');
+      return;
+    }
 
-            {/* Body */}
-            <View style={styles.body}>
+    setLoading(true); // Set loading to true when search begins
 
-                {/* Search Bar */}
-                <View style={styles.searchContainer}>
-                    <View>
-                        <Text style={styles.searchButtonText}>
-                            Agents. Tours. Loans. Homes.
-                        </Text>
-                    </View>
+    const endpoint = `https://ebuy-api.onrender.com/properties/${constructedQuery}`;
+    fetch(endpoint)
+      .then(response => response.json())
+      .then(data => {
+        setSearchResults(data);
+        navigation.navigate('SearchResult', { searchResults: data });
+      })
+      .catch(error => console.error('Error fetching search results:', error))
+      .finally(() => setLoading(false)); // Set loading to false when search completes
+  };
 
-                    {/* text input field */}
-                    <TextInput
-                        style={styles.input}
-                        placeholder="Search by type, closest landmark, or price"
-                        placeholderTextColor="#808080"
-                        // Implement onChangeText to handle search functionality
-                        onChangeText={(text) => console.log('Searching for: ', text)}
-                    />
-
-                </View>
-
-                {/* body ends */}
-            </View>
+  return (
+    <View style={styles.container}>
+      <Image
+        source={require('./assets/girl.png')}
+        style={styles.backgroundImage}
+      />
+      <View style={styles.overlay}></View>
+      <Image source={require('./assets/logo.png')} style={styles.logos} />
+      <View style={styles.body}>
+        <View style={styles.searchContainer}>
+          <SelectDropdown
+            data={['Duplex', 'Apartment', 'Ranch', 'Beachfront', 'Mansion', 'Estate']}
+            onSelect={(selectedItem, index) => {
+              setSelectedType(selectedItem);
+            }}
+            renderButton={(selectedItem, isOpened) => (
+              <TouchableOpacity style={styles.input}>
+                <Text style={styles.dropdownButtonText}>
+                  {selectedItem || 'Search by type'}
+                </Text>
+              </TouchableOpacity>
+            )}
+            renderItem={(item, index, isSelected) => (
+              <TouchableOpacity
+                style={[styles.dropdownItem, isSelected && styles.selectedItem]}
+                onPress={() => { }}
+              >
+                <Text style={styles.dropdownItemText}>{item}</Text>
+              </TouchableOpacity>
+            )}
+            showsVerticalScrollIndicator={false}
+            dropdownStyle={styles.dropdownMenu}
+          />
+          <SelectDropdown
+            data={['Texas', 'Oklahoma', 'West Virginia', 'Florida', 'Chicago']}
+            onSelect={(selectedItem, index) => {
+              setSelectedLocation(selectedItem);
+            }}
+            renderButton={(selectedItem, isOpened) => (
+              <TouchableOpacity style={styles.input}>
+                <Text style={styles.dropdownButtonText}>
+                  {selectedItem || 'Select Location (Optional)'}
+                </Text>
+              </TouchableOpacity>
+            )}
+            renderItem={(item, index, isSelected) => (
+              <TouchableOpacity
+                style={[styles.dropdownItem, isSelected && styles.selectedItem]}
+                onPress={() => { }}
+              >
+                <Text style={styles.dropdownItemText}>{item}</Text>
+              </TouchableOpacity>
+            )}
+            showsVerticalScrollIndicator={false}
+            dropdownStyle={styles.dropdownMenu}
+          />
+          <TouchableOpacity style={styles.searchButton} onPress={handleSearch} disabled={loading}>
+            {loading ? (
+              <ActivityIndicator size="small" color="#ffffff" />
+            ) : (
+              <Text style={styles.searchText}>Search</Text>
+            )}
+          </TouchableOpacity>
         </View>
-    );
+      </View>
+    </View>
+  );
 };
 
-// Stylesheet
 const styles = StyleSheet.create({
-    header: {
-        paddingTop: 50,
-        justifyContent: 'flex-end', // Align items to the bottom
-        alignItems: 'flex-end', // Align items to the right
-        paddingRight: 20, // Add some right padding for the logo
-    },
-    logoContainer: {
-        justifyContent: 'center', // Center the logo vertically
-        alignItems: 'flex-end', // Align the logo to the right
-    },
-    logo: {
-        width: 250,
-        height: 100,
-    },
-    body: {
-        flex: 1,
-        justifyContent: 'flex-end',
-        alignItems: 'center',
-    },
-    container: {
-        flex: 1,
-    },
-    backgroundImage: {
-        flex: 1,
-        position: 'absolute',
-        width: '100%',
-        height: '100%',
-        resizeMode: 'cover',
-    },
-    overlay: {
-        position: 'absolute',
-        width: '100%',
-        height: '100%',
-        backgroundColor: 'rgba(0, 0, 0, 0.3)', // Black color with 30% opacity
-    },
-    searchContainer: {
-        position: 'absolute',
-        bottom: 100,
-        // flexDirection: 'row',
-        alignItems: 'center',
-        marginVertical: 10,
-    },
-    input: {
-        flex: 1,
-        backgroundColor: '#ffffff',
-        borderWidth: 1,
-        borderColor: '#ccc',
-        borderRadius: 5,
-        paddingHorizontal: 18,
-        paddingVertical: 18,
-        margin: 15,
-        color: '#000',
-        width: '100%', // Adjust the width as needed
-    },
-    
-    searchButton: {
-        backgroundColor: '#1B6DC0',
-        borderRadius: 5,
-        paddingVertical: 15,
-        paddingHorizontal: 15,
-        marginRight: 10,
-    },
-    searchButtonText: {
-        color: '#fff',
-        fontWeight: 'bold',
-        fontSize: 24,
-        textShadowColor: '#000',
-        textShadowOffset: { width: 2, height: 2 },
-        textShadowRadius: 2,
-    }
-    
+  container: {
+    flex: 1,
+  },
+  body: {
+    flex: 1,
+    justifyContent: 'flex-end',
+    alignItems: 'center',
+  },
+  backgroundImage: {
+    flex: 1,
+    position: 'absolute',
+    width: '100%',
+    height: '100%',
+    resizeMode: 'cover',
+  },
+  overlay: {
+    position: 'absolute',
+    width: '100%',
+    height: '100%',
+    backgroundColor: 'rgba(0, 0, 0, 0.3)',
+  },
+  logos: {
+    position: 'absolute',
+    top: 30,
+    right: 20,
+    width: 100,
+    height: 80,
+    resizeMode: 'contain',
+  },
+  searchContainer: {
+    position: 'absolute',
+    bottom: 0,
+    alignItems: 'center',
+    width: '100%',
+    paddingTop: 40,
+    borderTopRightRadius: 200,
+    backgroundColor: '#ffffff',
+    paddingVertical: 30,
+    paddingHorizontal: 30,
+  },
+  input: {
+    flex: 1,
+    backgroundColor: '#ffffff',
+    borderWidth: 1,
+    borderColor: '#ccc',
+    borderRadius: 5,
+    paddingHorizontal: 18,
+    paddingVertical: 18,
+    margin: 15,
+    color: '#000',
+    width: '90%',
+  },
+  dropdownItem: {
+    paddingVertical: 10,
+    paddingHorizontal: 15,
+  },
+  selectedItem: {
+    backgroundColor: '#D2D9DF',
+  },
+  dropdownItemText: {
+    fontSize: 16,
+  },
+  searchButton: {
+    backgroundColor: '#1B6DC0',
+    borderRadius: 30,
+    paddingVertical: 10,
+    paddingHorizontal: 10,
+    marginRight: 10,
+    width: '90%',
+  },
+  searchText: {
+    color: '#fff',
+    fontWeight: 'bold',
+    fontSize: 18,
+    textAlign: 'center',
+  },
 });
 
 export default DefaultHome;

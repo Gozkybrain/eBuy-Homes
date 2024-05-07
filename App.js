@@ -3,12 +3,13 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import SplashScreen from './SplashScreen';
 import HomeScreen from './HomeScreen';
+import SearchResult from './SearchResult';
 import GetAuth from './access/GetAuth';
 // import ForgetPassword from './authentication/ForgetPassword';
 // import OTP from './authentication/OTP';
 // import NewPass from './authentication/NewPass';
 // import NewPage from './authentication/NewPage';
-import AuthMe from './access/AuthMe';
+// import AuthMe from './access/AuthMe';
 // import EmailReg from './authentication/EmailReg';
 // import VerifyEmail from './authentication/VerifyEmail';
 // import AuthMain from './authentication/AuthMain';
@@ -33,8 +34,8 @@ const App = () => {
         {/* Home screen is the main screen of the application */}
         <Stack.Screen name="GetAuth" component={GetAuth} options={{ headerShown: false }} />
 
-        {/* AuthMe screen to register user profile info with email */}
-        <Stack.Screen name="AuthMe" component={AuthMe} options={{ headerShown: false }} />
+        {/* Search Result Screen */}
+        <Stack.Screen name="SearchResult" component={SearchResult} options={{ headerShown: true }} />
 
         {/* ForgetPassword screen for resetting password */}
         {/* <Stack.Screen name="ForgetPassword" component={ForgetPassword} options={{ headerShown: false }} /> */}

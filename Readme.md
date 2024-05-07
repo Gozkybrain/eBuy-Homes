@@ -34,3 +34,4 @@ The project has been documented such that it can be understood by any level of d
 
 For Authenticating with Firebase, I have also provided a [Simple YouTube Guide to this regard](https://www.youtube.com/watch?v=MGBfr3WwIyw), I have commented my codes such that anyone can work with this repo as a guide.
 
+The API Server and Data are documented on Github at [feedMe API](https://github.com/Gozkybrain/feedMe-API), all parts of this project can be replicated.

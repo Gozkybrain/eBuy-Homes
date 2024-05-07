@@ -3,7 +3,7 @@
         "id": 1,
         "address": "123 Main Street",
         "price": "$250,000",
-        "type": "Single Family Home",
+        "type": "Duplex",
         "sellerLink": "https://example.com/seller",
         "amenities": [
             "Swimming Pool",
@@ -18,7 +18,7 @@
         "id": 2,
         "address": "456 Oak Street",
         "price": "$350,000",
-        "type": "Condominium",
+        "type": "Apartment",
         "sellerLink": "https://example.com/seller",
         "amenities": [
             "Fitness Center",
@@ -33,7 +33,7 @@
         "id": 3,
         "address": "789 Pine Street",
         "price": "$450,000",
-        "type": "Townhouse",
+        "type": "Apartment",
         "sellerLink": "https://example.com/seller",
         "amenities": [
             "Attached Garage",
@@ -63,7 +63,7 @@
         "id": 5,
         "address": "234 Maple Lane",
         "price": "$400,000",
-        "type": "Ranch Style Home",
+        "type": "Ranch",
         "sellerLink": "https://example.com/seller",
         "amenities": [
             "Large Yard",
@@ -78,7 +78,7 @@
         "id": 6,
         "address": "567 Walnut Avenue",
         "price": "$600,000",
-        "type": "Luxury Apartment",
+        "type": "Apartment",
         "sellerLink": "https://example.com/seller",
         "amenities": [
             "Swimming Pool",
@@ -93,7 +93,7 @@
         "id": 7,
         "address": "789 Cherry Lane",
         "price": "$700,000",
-        "type": "Colonial House",
+        "type": "Duplex",
         "sellerLink": "https://example.com/seller",
         "amenities": [
             "Spa Bathroom",
@@ -108,7 +108,7 @@
         "id": 8,
         "address": "890 Cedar Street",
         "price": "$800,000",
-        "type": "Modern Loft",
+        "type": "Duplex",
         "sellerLink": "https://example.com/seller",
         "amenities": [
             "Open Floor Plan",
@@ -123,7 +123,7 @@
         "id": 9,
         "address": "901 Pine Avenue",
         "price": "$750,000",
-        "type": "Beachfront Villa",
+        "type": "Beachfront",
         "sellerLink": "https://example.com/seller",
         "amenities": [
             "Private Beach Access",
@@ -138,7 +138,7 @@
         "id": 10,
         "address": "123 Pine Street",
         "price": "$650,000",
-        "type": "Lakefront Cabin",
+        "type": "Beachfront",
         "sellerLink": "https://example.com/seller",
         "amenities": [
             "Boat Dock",
@@ -153,7 +153,7 @@
         "id": 11,
         "address": "789 Magnolia Drive",
         "price": "$550,000",
-        "type": "Mountain Chalet",
+        "type": "Mansion",
         "sellerLink": "https://example.com/seller",
         "amenities": [
             "Ski-in/Ski-out",
@@ -168,7 +168,7 @@
         "id": 12,
         "address": "456 Cypress Lane",
         "price": "$800,000",
-        "type": "Modern Penthouse",
+        "type": "Duplex",
         "sellerLink": "https://example.com/seller",
         "amenities": [
             "Roof Terrace",
@@ -183,7 +183,7 @@
         "id": 13,
         "address": "101 Pine Ridge Road",
         "price": "$700,000",
-        "type": "Ski Cabin",
+        "type": "Duplex",
         "sellerLink": "https://example.com/seller",
         "amenities": [
             "Fireplace",
@@ -198,7 +198,7 @@
         "id": 14,
         "address": "234 Oakwood Drive",
         "price": "$950,000",
-        "type": "Waterfront Estate",
+        "type": "Estate",
         "sellerLink": "https://example.com/seller",
         "amenities": [
             "Boat Dock",
@@ -228,7 +228,7 @@
         "id": 16,
         "address": "890 Forest Avenue",
         "price": "$550,000",
-        "type": "Cabin",
+        "type": "Ranch",
         "sellerLink": "https://example.com/seller",
         "amenities": [
             "Wood-Burning Fireplace",
@@ -243,7 +243,7 @@
         "id": 17,
         "address": "123 Beachfront Road",
         "price": "$1,500,000",
-        "type": "Beach House",
+        "type": "Beachfront",
         "sellerLink": "https://example.com/seller",
         "amenities": [
             "Private Beach Access",
@@ -258,7 +258,7 @@
         "id": 18,
         "address": "456 Lakeview Drive",
         "price": "$750,000",
-        "type": "Lake House",
+        "type": "Beachfront",
         "sellerLink": "https://example.com/seller",
         "amenities": [
             "Boat Dock",
@@ -273,7 +273,7 @@
         "id": 19,
         "address": "789 River Road",
         "price": "$650,000",
-        "type": "Riverside Cottage",
+        "type": "Beachfront",
         "sellerLink": "https://example.com/seller",
         "amenities": [
             "Riverfront Deck",
@@ -288,7 +288,7 @@
         "id": 20,
         "address": "101 Vineyard Lane",
         "price": "$900,000",
-        "type": "Vineyard Estate",
+        "type": "Estate",
         "sellerLink": "https://example.com/seller",
         "amenities": [
             "Vineyard",
@@ -303,7 +303,7 @@
         "id": 21,
         "address": "123 Pine Street",
         "price": "$250,000",
-        "type": "Single Family Home",
+        "type": "Duplex",
         "sellerLink": "https://example.com/seller",
         "amenities": [
             "Swimming Pool",
@@ -318,7 +318,7 @@
         "id": 22,
         "address": "456 Oak Lane",
         "price": "$350,000",
-        "type": "Condominium",
+        "type": "Apartment",
         "sellerLink": "https://example.com/seller",
         "amenities": [
             "Fitness Center",
@@ -333,7 +333,7 @@
         "id": 23,
         "address": "789 Pine Street",
         "price": "$450,000",
-        "type": "Townhouse",
+        "type": "Ranch",
         "sellerLink": "https://example.com/seller",
         "amenities": [
             "Attached Garage",
@@ -378,7 +378,7 @@
         "id": 26,
         "address": "567 Cedar Avenue",
         "price": "$600,000",
-        "type": "Ranch Style Home",
+        "type": "Ranch",
         "sellerLink": "https://example.com/seller",
         "amenities": [
             "Horse Stable",
@@ -393,7 +393,7 @@
         "id": 27,
         "address": "890 Birch Lane",
         "price": "$750,000",
-        "type": "Luxury Villa",
+        "type": "Mansion",
         "sellerLink": "https://example.com/seller",
         "amenities": [
             "Infinity Pool",
@@ -408,7 +408,7 @@
         "id": 28,
         "address": "123 Pinecrest Drive",
         "price": "$300,000",
-        "type": "Cottage",
+        "type": "Ranch",
         "sellerLink": "https://example.com/seller",
         "amenities": [
             "Fireplace",
@@ -423,7 +423,7 @@
         "id": 29,
         "address": "456 Rosewood Avenue",
         "price": "$500,000",
-        "type": "Modern Loft",
+        "type": "Duplex",
         "sellerLink": "https://example.com/seller",
         "amenities": [
             "Open Floor Plan",
@@ -438,7 +438,7 @@
         "id": 30,
         "address": "789 Maple Lane",
         "price": "$650,000",
-        "type": "Lakefront Retreat",
+        "type": "Beachfront",
         "sellerLink": "https://example.com/seller",
         "amenities": [
             "Private Dock",
@@ -453,7 +453,7 @@
         "id": 31,
         "address": "890 Oak Street",
         "price": "$550,000",
-        "type": "Modern Townhouse",
+        "type": "Ranch",
         "sellerLink": "https://example.com/seller",
         "amenities": [
             "Roof Terrace",
@@ -468,7 +468,7 @@
         "id": 32,
         "address": "456 Elm Avenue",
         "price": "$700,000",
-        "type": "Luxury Penthouse",
+        "type": "Mansion",
         "sellerLink": "https://example.com/seller",
         "amenities": [
             "Private Elevator",
@@ -483,7 +483,7 @@
         "id": 33,
         "address": "123 Cedar Lane",
         "price": "$450,000",
-        "type": "Country Home",
+        "type": "Duplex",
         "sellerLink": "https://example.com/seller",
         "amenities": [
             "Wrap-around Porch",
@@ -513,7 +513,7 @@
         "id": 35,
         "address": "101 Pine Street",
         "price": "$500,000",
-        "type": "Mountain Cabin",
+        "type": "Mansion",
         "sellerLink": "https://example.com/seller",
         "amenities": [
             "Stone Fireplace",
@@ -528,7 +528,7 @@
         "id": 36,
         "address": "234 Oak Lane",
         "price": "$600,000",
-        "type": "Lakefront Cottage",
+        "type": "Beachfront",
         "sellerLink": "https://example.com/seller",
         "amenities": [
             "Private Dock",
@@ -543,7 +543,7 @@
         "id": 37,
         "address": "567 Maple Avenue",
         "price": "$750,000",
-        "type": "Historic Mansion",
+        "type": "Mansion",
         "sellerLink": "https://example.com/seller",
         "amenities": [
             "Ballroom",
@@ -558,7 +558,7 @@
         "id": 38,
         "address": "890 Cedar Lane",
         "price": "$850,000",
-        "type": "Gated Estate",
+        "type": "Estate",
         "sellerLink": "https://example.com/seller",
         "amenities": [
             "Swimming Pool",
@@ -573,7 +573,7 @@
         "id": 39,
         "address": "123 Pine Street",
         "price": "$400,000",
-        "type": "Urban Loft",
+        "type": "Ranch",
         "sellerLink": "https://example.com/seller",
         "amenities": [
             "Exposed Brick",
@@ -588,7 +588,7 @@
         "id": 40,
         "address": "456 Maple Road",
         "price": "$700,000",
-        "type": "Seaside Retreat",
+        "type": "Beachfront",
         "sellerLink": "https://example.com/seller",
         "amenities": [
             "Private Beach Access",
@@ -603,7 +603,7 @@
         "id": 41,
         "address": "789 Elm Avenue",
         "price": "$550,000",
-        "type": "Mountain Cabin",
+        "type": "Mansion",
         "sellerLink": "https://example.com/seller",
         "amenities": [
             "Scenic Views",
@@ -618,7 +618,7 @@
         "id": 42,
         "address": "101 Pinecrest Drive",
         "price": "$650,000",
-        "type": "Riverside Retreat",
+        "type": "Beachfront",
         "sellerLink": "https://example.com/seller",
         "amenities": [
             "River Access",
@@ -633,7 +633,7 @@
         "id": 43,
         "address": "234 Oak Lane",
         "price": "$750,000",
-        "type": "Beach House",
+        "type": "Beachfront",
         "sellerLink": "https://example.com/seller",
         "amenities": [
             "Private Beachfront",
@@ -648,7 +648,7 @@
         "id": 44,
         "address": "567 Maple Avenue",
         "price": "$850,000",
-        "type": "Golf Course Estate",
+        "type": "Estate",
         "sellerLink": "https://example.com/seller",
         "amenities": [
             "Private Golf Course",
@@ -663,7 +663,7 @@
         "id": 45,
         "address": "890 Cedar Lane",
         "price": "$950,000",
-        "type": "Exclusive Villa",
+        "type": "Ranch",
         "sellerLink": "https://example.com/seller",
         "amenities": [
             "Spa Retreat",
@@ -678,7 +678,7 @@
         "id": 46,
         "address": "123 Maple Street",
         "price": "$550,000",
-        "type": "Lakefront Cottage",
+        "type": "Beachfront",
         "sellerLink": "https://example.com/seller",
         "amenities": [
             "Private Dock",
@@ -693,7 +693,7 @@
         "id": 47,
         "address": "456 Birch Avenue",
         "price": "$650,000",
-        "type": "Mountain Chalet",
+        "type": "Mansion",
         "sellerLink": "https://example.com/seller",
         "amenities": [
             "Hot Tub",
@@ -708,7 +708,7 @@
         "id": 48,
         "address": "789 Cedar Lane",
         "price": "$750,000",
-        "type": "Equestrian Estate",
+        "type": "Estate",
         "sellerLink": "https://example.com/seller",
         "amenities": [
             "Barn with Stables",
@@ -723,7 +723,7 @@
         "id": 49,
         "address": "101 Elm Street",
         "price": "$850,000",
-        "type": "Country Estate",
+        "type": "Estate",
         "sellerLink": "https://example.com/seller",
         "amenities": [
             "Manicured Gardens",

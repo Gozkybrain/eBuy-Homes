@@ -20,7 +20,9 @@ web-build/
 test.js
 explore/
 authentication/
-AuthMe/
+AuthMes/
+AuthMe1.js
+SignAuth2.js
 firebaseConfig.js
 
 

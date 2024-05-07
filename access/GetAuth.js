@@ -1,13 +1,18 @@
-// * This is the Authentication page after the Splashscreen
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, ImageBackground, TouchableOpacity, TextInput, Button, Image, Alert } from 'react-native';
+import { View, Text, StyleSheet, ImageBackground, TouchableOpacity, TextInput, Button, Image, Alert, ActivityIndicator } from 'react-native';
 import { initializeApp } from 'firebase/app';
 import { getAuth, initializeAuth, getReactNativePersistence, createUserWithEmailAndPassword, signInWithEmailAndPassword, sendPasswordResetEmail } from 'firebase/auth';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 // Initialize Firebase app with your Firebase config
 const firebaseConfig = {
-  // == your firebase configurations here ==
+  apiKey: "AIzaSyB58JCFyu583IfcPF4xoHBAkoXfuHCfUZk",
+  authDomain: "mytest-404010.firebaseapp.com",
+  projectId: "mytest-404010",
+  storageBucket: "mytest-404010.appspot.com",
+  messagingSenderId: "1044849420231",
+  appId: "1:1044849420231:web:2e61b8fbe58dd74d929be2",
+  measurementId: "G-2DHLQFWG1D"
 };
 
 // Initialize Firebase
@@ -34,9 +39,16 @@ const GetAuth = ({ navigation }) => {
     gender: '',
     fullName: ''
   });
+  const [loading, setLoading] = useState(false); // State variable for loading animation
 
+
+  // ? DO NOT EDIT
+  const handleSearch = () => {
+    navigation.navigate('HomeScreen');
+  }
   // Function to handle user authentication (login or registration)
   const handleAuthentication = async () => {
+    setLoading(true); // Show loading animation
     // Reset all previous errors
     setErrors({
       email: '',
@@ -80,26 +92,25 @@ const GetAuth = ({ navigation }) => {
       }
     }
 
-
-
     if (formValid) {
       try {
         if (isLogin) {
           // Perform email/password login
           await signInWithEmailAndPassword(auth, email, password);
-          console.log('User logged in successfully!');
+          console.log(email + ' has logged in successfully!');
         } else {
           // Perform email/password registration
           const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-          console.log('User registered successfully!', userCredential.user);
+          console.log(email + ' registered successfully!', userCredential.user);
         }
         // Navigate to HomeScreen.js upon successful authentication
         navigation.navigate('HomeScreen');
       } catch (error) {
-        console.error('Authentication error:', error.message);
+        // console.error('Authentication error:', error.message);
         Alert.alert('Please Provide Valid Information');
       }
     }
+    setLoading(false); // Hide loading animation
   };
 
   const handleForgotPassword = async () => {
@@ -108,7 +119,7 @@ const GetAuth = ({ navigation }) => {
       await sendPasswordResetEmail(auth, resetEmail);
       Alert.alert('Password Reset Email Sent', 'Check your email inbox for instructions to reset your password.');
     } catch (error) {
-      console.error('Password reset error:', error.message);
+      // console.error('Password reset error:', error.message);
       // * if not, an error message is delivered
       Alert.alert('Password Reset Failed', 'Failed to send password reset email. Please try again.');
     }
@@ -120,16 +131,17 @@ const GetAuth = ({ navigation }) => {
       {/* Logo at top left */}
       <Image source={require('../assets/logo.png')} style={styles.logo} />
 
+
       {/* Main Page Content */}
       <View style={styles.container}>
         {!resetMode ? (
           <>
-          {/* Text to display depending on the screen, Login or Register */}
+            {/* Text to display depending on the screen, Login or Register */}
             <Text style={styles.title}>{isLogin ? 'Login to Continue' : 'Register an Account'}</Text>
             {!isLogin && (
               // Will not show on login page
               <>
-              {/* Choose a Username */}
+                {/* Choose a Username */}
                 <Text style={styles.errorText}>{errors.username}</Text>
                 <Text style={styles.inputText}>Choose a Username</Text>
                 <TextInput
@@ -161,7 +173,7 @@ const GetAuth = ({ navigation }) => {
             {!isLogin && (
               // Will not also show on login page
               <>
-              {/* Select a Gender, Male or Female */}
+                {/* Select a Gender, Male or Female */}
                 <Text style={styles.errorText}>{errors.gender}</Text>
                 <Text style={styles.inputText}>Select a Gender</Text>
                 <View style={styles.genderContainer}>
@@ -194,7 +206,12 @@ const GetAuth = ({ navigation }) => {
 
             {/* Submit button based on screen: Login or Register */}
             <TouchableOpacity onPress={handleAuthentication} style={styles.authButton}>
-              <Text style={styles.buttonText}>{isLogin ? 'Login' : 'Create Account'}</Text>
+              {loading ? (
+                // Show loading indicator if loading state is true
+                <ActivityIndicator color="#fff" />
+              ) : (
+                <Text style={styles.buttonText}>{isLogin ? 'Login' : 'Create Account'}</Text>
+              )}
             </TouchableOpacity>
             {/* Toggle text for login or register depending on screen */}
             <TouchableOpacity onPress={() => setIsLogin(!isLogin)}>
@@ -209,7 +226,7 @@ const GetAuth = ({ navigation }) => {
           </>
         ) : (
           <>
-          {/* Opening the Forgot Password Tab */}
+            {/* Opening the Forgot Password Tab */}
             <Text style={styles.title}>Forgot Password</Text>
             {/* Input Email Address */}
             <TextInput
