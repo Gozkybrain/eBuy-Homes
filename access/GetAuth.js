@@ -128,9 +128,12 @@ const GetAuth = ({ navigation }) => {
   return (
     <ImageBackground source={require('../assets/black.webp')} style={styles.backgroundImage}>
 
-      {/* Logo at top left */}
-      <Image source={require('../assets/logo.png')} style={styles.logo} />
-
+ {/* Logo at top left */}
+ <Image source={require('../assets/logo.png')} style={styles.logo} />
+      <TouchableOpacity onPress={handleSearch}>
+        {/* Logo at top left */}
+        <Image source={require('../assets/logo.png')} style={styles.logo} />
+      </TouchableOpacity>
 
       {/* Main Page Content */}
       <View style={styles.container}>

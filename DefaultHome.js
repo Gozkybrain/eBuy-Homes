@@ -51,7 +51,7 @@ const DefaultHome = ({ navigation }) => {
       <View style={styles.body}>
         <View style={styles.searchContainer}>
           <SelectDropdown
-            data={['Duplex', 'Apartment', 'Ranch', 'Beachfront', 'Mansion', 'Estate']}
+            data={['', 'Duplex', 'Apartment', 'Ranch', 'Beachfront', 'Mansion', 'Estate']}
             onSelect={(selectedItem, index) => {
               setSelectedType(selectedItem);
             }}
@@ -74,7 +74,7 @@ const DefaultHome = ({ navigation }) => {
             dropdownStyle={styles.dropdownMenu}
           />
           <SelectDropdown
-            data={['Texas', 'Oklahoma', 'West Virginia', 'Florida', 'Chicago']}
+            data={['', 'Texas', 'Oklahoma', 'West Virginia', 'Florida', 'Chicago']}
             onSelect={(selectedItem, index) => {
               setSelectedLocation(selectedItem);
             }}

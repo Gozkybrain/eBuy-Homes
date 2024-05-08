@@ -5,15 +5,8 @@ import SplashScreen from './SplashScreen';
 import HomeScreen from './HomeScreen';
 import SearchResult from './SearchResult';
 import GetAuth from './access/GetAuth';
-// import ForgetPassword from './authentication/ForgetPassword';
-// import OTP from './authentication/OTP';
-// import NewPass from './authentication/NewPass';
-// import NewPage from './authentication/NewPage';
-// import AuthMe from './access/AuthMe';
-// import EmailReg from './authentication/EmailReg';
-// import VerifyEmail from './authentication/VerifyEmail';
-// import AuthMain from './authentication/AuthMain';
-// import Home from './explore/Home';
+import GetSeller from './GetSeller';
+import SellerInfo from './SellerInfo';
 
 // Setting up a stack navigator
 const Stack = createStackNavigator();
@@ -35,13 +28,13 @@ const App = () => {
         <Stack.Screen name="GetAuth" component={GetAuth} options={{ headerShown: false }} />
 
         {/* Search Result Screen */}
-        <Stack.Screen name="SearchResult" component={SearchResult} options={{ headerShown: true }} />
+        <Stack.Screen name="SearchResult" component={SearchResult} options={{ headerShown: false }} />
 
-        {/* ForgetPassword screen for resetting password */}
-        {/* <Stack.Screen name="ForgetPassword" component={ForgetPassword} options={{ headerShown: false }} /> */}
+        {/* Seller Info displays a static seller user contact info */}
+        <Stack.Screen name="SellerInfo" component={SellerInfo} options={{ headerShown: false }} />
 
         {/* OTP screen for entering one-time password */}
-        {/* <Stack.Screen name="OTP" component={OTP} options={{ headerShown: false }} /> */}
+        <Stack.Screen name="GetSeller" component={GetSeller} options={{ headerShown: false }} />
 
         {/* NewPass screen for resetting new password */}
         {/* <Stack.Screen name="NewPass" component={NewPass} options={{ headerShown: false }} /> */}
