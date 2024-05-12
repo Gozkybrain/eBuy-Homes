@@ -3,10 +3,12 @@ import { View, Text, FlatList, StyleSheet, TouchableOpacity, Modal, Image, Scrol
 import { FontAwesome5 } from '@expo/vector-icons';
 
 const SearchResult = ({ route, navigation }) => {
-    const { searchResults } = route.params;
-    const [selectedItem, setSelectedItem] = useState(null);
-    const [modalVisible, setModalVisible] = useState(false);
+    // State variables
+    const { searchResults } = route.params; // Extracting searchResults from route params
+    const [selectedItem, setSelectedItem] = useState(null); // Stores selected item for modal display
+    const [modalVisible, setModalVisible] = useState(false); // Controls modal visibility
 
+    // Function to handle navigation to the GetSeller screen
     const handleSeller = () => {
         // Close the modal
         closeModal();
@@ -14,19 +16,19 @@ const SearchResult = ({ route, navigation }) => {
         navigation.navigate('GetSeller');
     }
     
-    
-
+    // Function to handle pressing on a search result item
     const handleItemPress = (item) => {
         setSelectedItem(item);
-        setModalVisible(true);
+        setModalVisible(true); // Show the modal
     };
 
+    // Function to close the modal
     const closeModal = () => {
         setSelectedItem(null);
-        setModalVisible(false);
+        setModalVisible(false); // Hide the modal
     };
 
-
+    // Function to render each search result item in the FlatList
     const renderListItem = ({ item }) => (
         <TouchableOpacity style={styles.resultItem} onPress={() => handleItemPress(item)}>
             {/* Thumbnail */}
@@ -42,7 +44,8 @@ const SearchResult = ({ route, navigation }) => {
         </TouchableOpacity>
     );
 
-    return (
+       // Return the component structure
+       return (
         <View style={styles.container}>
             {/* Option to go back */}
             <View style={styles.artistContainer}>
@@ -52,6 +55,7 @@ const SearchResult = ({ route, navigation }) => {
                 </TouchableOpacity>
                 <Image source={require('./assets/logo.png')} style={styles.logos} />
             </View>
+            {/* FlatList to display search results */}
             <FlatList
                 data={searchResults}
                 renderItem={renderListItem}
@@ -64,7 +68,7 @@ const SearchResult = ({ route, navigation }) => {
                 visible={modalVisible}
                 onRequestClose={closeModal}
             >
-                {/* Modal content here */}
+                {/* Modal content */}
                 <View style={styles.modalContainer}>
                     <Image
                         source={{ uri: selectedItem ? selectedItem.thumbnail : null }}
@@ -72,48 +76,41 @@ const SearchResult = ({ route, navigation }) => {
                     />
                     <View style={styles.modalContent}>
                         <ScrollView showsVerticalScrollIndicator={false}>
-                            {/* Log the URI */}
-                            {/* {console.log(selectedItem ? selectedItem.thumbnail : 'Thumbnail URI not available')} */}
-                            {/* Render the image */}
-                            {/* <Image
-                            source={{ uri: selectedItem ? selectedItem.thumbnail : null }}
-                            style={styles.modalThumbnail}
-                        /> */}
-
-                            {/* Address */}
+                            {/* Property details */}
                             <FontAwesome5 name="globe" size={20} color="#000" />
                             <Text style={styles.modalTitle}>
-                                {/* address and location */}
-                                {selectedItem ? selectedItem.address : ''}, {selectedItem ? selectedItem.location : ''}</Text>
-
-                            {/* Type and price */}
+                                {selectedItem ? selectedItem.address : ''}, {selectedItem ? selectedItem.location : ''}
+                            </Text>
                             <View style={styles.artistContainer}>
-                                <Text style={styles.modalTexts}><Text style={styles.modalTextsBold}>&#8226; Type: </Text>
-                                    {selectedItem ? selectedItem.type : ''}</Text>
-                                <Text style={styles.modalTexts}><Text style={styles.modalTextsBold}>&#8226; Price: </Text>
-                                    {selectedItem ? selectedItem.price : ''}</Text>
+                                <Text style={styles.modalTexts}>
+                                    <Text style={styles.modalTextsBold}>&#8226; Type: </Text>
+                                    {selectedItem ? selectedItem.type : ''}
+                                </Text>
+                                <Text style={styles.modalTexts}>
+                                    <Text style={styles.modalTextsBold}>&#8226; Price: </Text>
+                                    {selectedItem ? selectedItem.price : ''}
+                                </Text>
                             </View>
-
-                            {/* Closest landmark with description */}
-                            <Text style={styles.modalTexts}><Text style={styles.modalTextsBold}>&#8226; Description: </Text>
-                                {selectedItem ? selectedItem.description : ''}</Text>
-                            <Text style={styles.modalTexts}><Text style={styles.modalTextsBold}>&#8226; Closest Landmark: </Text>
-                                {selectedItem ? selectedItem.closestLandmark : ''}</Text>
-
-                            {/* Add more details if needed */}
+                            {/* Other property details */}
+                            <Text style={styles.modalTexts}>
+                                <Text style={styles.modalTextsBold}>&#8226; Description: </Text>
+                                {selectedItem ? selectedItem.description : ''}
+                            </Text>
+                            <Text style={styles.modalTexts}>
+                                <Text style={styles.modalTextsBold}>&#8226; Closest Landmark: </Text>
+                                {selectedItem ? selectedItem.closestLandmark : ''}
+                            </Text>
                             {/* Amenities */}
-                            <Text style={styles.modalTexts}><Text style={styles.modalTextsBold}>&#8226; Amenities: </Text>
-                                {selectedItem ? selectedItem.amenities.join(', ') : ''}</Text>
-
-
-
-                            {/* close button and show seller */}
+                            <Text style={styles.modalTexts}>
+                                <Text style={styles.modalTextsBold}>&#8226; Amenities: </Text>
+                                {selectedItem ? selectedItem.amenities.join(', ') : ''}
+                            </Text>
+                            {/* Buttons */}
                             <View style={styles.buttonContainer}>
                                 {/* Button to show seller */}
                                 <TouchableOpacity style={[styles.button, styles.sellerButton]} onPress={handleSeller}>
                                     <Text style={[styles.buttonText, styles.showSellerButtonText]}>Show Seller</Text>
                                 </TouchableOpacity>
-
                                 {/* Close button */}
                                 <TouchableOpacity style={[styles.button, styles.closeButton]} onPress={closeModal}>
                                     <Text style={[styles.buttonText, styles.closeButtonText]}>Close</Text>
@@ -122,8 +119,6 @@ const SearchResult = ({ route, navigation }) => {
                         </ScrollView>
                     </View>
                 </View>
-
-
             </Modal>
         </View>
     );

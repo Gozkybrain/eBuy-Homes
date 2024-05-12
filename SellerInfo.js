@@ -10,7 +10,7 @@ const SellerInfo = ({ navigation }) => {
         <View style={styles.container}>
             {/* User Profile Pic */}
             <Image
-                source={require('./assets/amazing.png')} // Replace with actual profile pic
+                source={require('./assets/amazing.png')} 
                 style={styles.profilePic}
             />
 
@@ -22,8 +22,8 @@ const SellerInfo = ({ navigation }) => {
             </View>
 
             {/* Button to show seller */}
-            <TouchableOpacity style={[styles.button, styles.sellerButton]} onPress={handleSeller}>
-                <Text style={[styles.buttonText, styles.showSellerButtonText]}>Continue</Text>
+            <TouchableOpacity style={[styles.button, styles.sellerButton]} onPress={() => navigation.goBack()}>
+                <Text style={[styles.buttonText, styles.showSellerButtonText]}>Continue  Shopping</Text>
             </TouchableOpacity>
 
         </View>

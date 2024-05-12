@@ -2,7 +2,7 @@ import React from 'react';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import { FontAwesome5 } from '@expo/vector-icons'; // Import FontAwesome icons
 import DefaultHome from './DefaultHome';
-import GetHelp from './GetHelp';
+import GetUser from './access/GetUser';
 import CheapList from './CheapList';
 import NewList from './NewList';
 
@@ -63,13 +63,13 @@ const HomeScreen = () => {
       {/* Help tab */}
       <Tab.Screen 
         name="Help" 
-        component={GetHelp} 
+        component={GetUser} 
         options={{
           // Icon for Help tab
           tabBarIcon: ({ focused, color }) => (
-            <FontAwesome5 name="question-circle" size={20} color={focused ? '#000' : color} />
+            <FontAwesome5 name="user-tie" size={20} color={focused ? '#000' : color} />
           ),
-          tabBarLabel: 'Help', // Label for Help tab
+          tabBarLabel: 'Account', // Label for Help tab
         }}
       />
     </Tab.Navigator>

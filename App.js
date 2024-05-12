@@ -7,6 +7,8 @@ import SearchResult from './SearchResult';
 import GetAuth from './access/GetAuth';
 import GetSeller from './GetSeller';
 import SellerInfo from './SellerInfo';
+import Loader from './Loader';
+import ResetPassword from './access/ResetPassword';
 
 // Setting up a stack navigator
 const Stack = createStackNavigator();
@@ -36,23 +38,11 @@ const App = () => {
         {/* OTP screen for entering one-time password */}
         <Stack.Screen name="GetSeller" component={GetSeller} options={{ headerShown: false }} />
 
-        {/* NewPass screen for resetting new password */}
-        {/* <Stack.Screen name="NewPass" component={NewPass} options={{ headerShown: false }} /> */}
+        {/* Animated Screen to serve loading process */}
+        <Stack.Screen name="Loader" component={Loader} options={{ headerShown: false }} />
 
-        {/* EmailReg screen enables users register with email option */}
-        {/* <Stack.Screen name="EmailReg" component={EmailReg} options={{ headerShown: false }} /> */}
-
-        {/* AuthMain screen to complete user profile registration with email */}
-        {/* <Stack.Screen name="AuthMain" component={AuthMain} options={{ headerShown: false }} /> */}
-
-        {/* VerifyEmail screen to send email OTP verification during registration */}
-        {/* <Stack.Screen name="VerifyEmail" component={VerifyEmail} options={{ headerShown: false }} /> */}
-
-        {/* New Page Screen is the loader before Home Access */}
-        {/* <Stack.Screen name="NewPage" component={NewPage} options={{ headerShown: false }} /> */}
-
-        {/* Home screen after login access */}
-        {/* <Stack.Screen name="Home" component={Home} options={{ headerShown: false }} /> */}
+        {/* Reset Password Screen. */}
+        <Stack.Screen name="ResetPassword" component={ResetPassword} options={{ headerShown: false }} />
 
       </Stack.Navigator>
     </NavigationContainer>

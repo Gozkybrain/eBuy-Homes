@@ -1,134 +1,122 @@
-import React, { useState } from 'react';
-import { View, Text, StyleSheet, Image, TextInput, TouchableOpacity, Alert } from 'react-native';
-import { LinearGradient } from 'expo-linear-gradient';
+import React, { useState, useEffect } from 'react';
+import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native';
+import Loader from './Loader'; // Import the Loader component
 
 const NewList = ({ navigation }) => {
-    // State variables to manage form inputs
-    const [gender, setGender] = useState('');
-    const [selectedDate, setSelectedDate] = useState('');
-    const [fullName, setFullName] = useState('');
+    // State variables
+    const [property, setProperty] = useState(null); // Stores property data
+    const [loading, setLoading] = useState(true); // Loading state
 
-    const goBack = () => {
-        navigation.goBack(); // Go back to the previous screen
-    };
+    // Fetch a random property when the component mounts
+    useEffect(() => {
+        fetchProperty();
+    }, []);
 
-    // Function to handle form submission
-    const handleContinue = () => {
-        // Check if all required fields are filled
-        if (gender.trim() !== '' && selectedDate.trim() !== '' && fullName.trim() !== '') {
-            // Navigate to AuthMain component if all fields are filled
-            navigation.navigate('AuthMain');
-        } else {
-            // Display error message if any required field is empty
-            Alert.alert('Error', 'Please provide all information!');
+    // Function to fetch a random property from the API
+    const fetchProperty = async () => {
+        try {
+            const response = await fetch('https://ebuy-api.onrender.com/properties/random');
+            const data = await response.json();
+            setProperty(data);
+            setLoading(false); // Set loading state to false after data is fetched
+        } catch (error) {
+            console.error('Error fetching property:', error);
+            setLoading(false); // Set loading state to false if fetching fails
         }
     };
 
-    // Function to format the date as "dd/mm/yyyy" while typing
-    const formatDateString = (text) => {
-        // Remove non-numeric characters
-        const numericText = text.replace(/\D/g, '');
-        // Insert slashes at appropriate positions
-        if (numericText.length > 2 && numericText.length <= 4) {
-            return `${numericText.slice(0, 2)}/${numericText.slice(2)}`;
-        } else if (numericText.length > 4) {
-            return `${numericText.slice(0, 2)}/${numericText.slice(2, 4)}/${numericText.slice(4, 8)}`;
-        } else {
-            return numericText;
-        }
+    // Function to handle pressing on a property item
+    const handleItemPress = () => {
+        // Navigate to the GetSeller screen
+        navigation.navigate('GetSeller');
     };
 
+    // Return the component structure
     return (
         <View style={styles.container}>
-
-            {/* Header */}
-            <View style={styles.header}>
-
-
-                {/* logo image */}
-                <Image source={require('./assets/myLogo.png')} style={styles.logo} />
-            </View>
-
-            {/* Body */}
-            <View style={styles.body}>
-                {/* Gradient */}
-                <LinearGradient
-                    colors={['rgba(0,0,0,0)', 'rgba(0,0,0,0.7)']}
-                    style={styles.gradient}
-                />
-
-                {/* Form */}
-                <View style={styles.accordionButtonLogin}>
-                    
-                       
-                    <Image
-                source={require('./assets/group3.png')}
-                style={styles.helpImg}
-            />
-            <Text>
-                New List
-            </Text>
-
-                </View>
-            </View>
+            {loading ? ( // Show Loader if data is still being fetched
+                <Loader />
+            ) : (
+                // Render the property if available
+                property && (
+                    <TouchableOpacity style={styles.resultItem} onPress={handleItemPress}>
+                        {/* Property thumbnail */}
+                        <Image source={{ uri: property.thumbnail }} style={styles.thumbnail} />
+                        {/* Property details */}
+                        <View style={styles.details}>
+                            <Text style={styles.property}>{property.type} with {property.amenities.join(', ')}</Text>
+                            <Text style={styles.title}>{property.address}, {property.location}</Text>
+                            <Text style={styles.type}>Closest Landmark: {property.closestLandmark}</Text>
+                            <View style={styles.typePriceContainer}>
+                                <Text style={styles.type}>Type: {property.type}</Text>
+                                <Text style={styles.price}>Price: {property.price}</Text>
+                            </View>
+                        </View>
+                        {/* Button to show seller */}
+                        <TouchableOpacity style={styles.button} onPress={handleItemPress}>
+                            <Text style={styles.buttonText}>Show Seller</Text>
+                        </TouchableOpacity>
+                    </TouchableOpacity>
+                )
+            )}
         </View>
     );
 };
 
-// Stylesheet
+// Styles
 const styles = StyleSheet.create({
-    header: {
-        padding: 20,
-        paddingTop: 50,
-        justifyContent: 'center', // Center the logo vertically
-        alignItems: 'flex-end', // Align the logo to the right
-    },
-    logo: {
-        width: 250,
-        height: 100,
-    },
-    helpImg: {
-        width: '100%',
-        height: '80%',
-    },
-    body: {
-        flex: 1,
-        justifyContent: 'flex-end',
-        alignItems: 'center',
-    },
-    accordionLogin: {
-        backgroundColor: '#ffffff',
-        borderTopRightRadius: 100,
-        overflow: 'hidden',
-    },
-    gradient: {
-        position: 'absolute',
-        bottom: 0,
-        left: 0,
-        width: '100%',
-        height: '60%',
-    },
     container: {
         flex: 1,
-        backgroundColor: '#000',
-        position: 'absolute',
+        backgroundColor: '#fff',
+    },
+    resultItem: {
+        marginBottom: 10,
+        borderRadius: 5,
+        flex: 1,
+    },
+    thumbnail: {
         width: '100%',
-        height: '100%',
-        resizeMode: 'cover',
+        height: '70%',
+        borderRadius: 5,
+        marginRight: 10,
+    },
+    details: {
+        margin: 20,
     },
     title: {
         fontSize: 18,
-        fontFamily: 'Trebuchet MS',
-        marginBottom: 20,
-        color: '#FFFFFF',
-        marginTop: 30,
+        fontWeight: 'bold',
+        marginBottom: 5,
     },
-    accordionButtonLogin: {
-        backgroundColor: '#fff',
-        paddingTop: 30,
-        width: '100%',
-        borderTopRightRadius: 200,
-        overflow: 'hidden',
+    typePriceContainer: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+    },
+    type: {
+        fontSize: 18,
+    },
+    price: {
+        fontSize: 18,
+        textAlign: 'right',
+    },
+    property: {
+        fontSize: 24,
+        fontWeight: 'bold',
+        marginBottom: 15,
+    },
+    button: {
+        borderRadius: 30,
+        paddingVertical: 10,
+        paddingHorizontal: 10,
+        marginHorizontal: 5,
+        backgroundColor: '#1B6DC0',
+    },
+    buttonText: {
+        fontWeight: 'bold',
+        fontSize: 16,
+        textAlign: 'center',
+        color: '#fff',
     },
 });
 

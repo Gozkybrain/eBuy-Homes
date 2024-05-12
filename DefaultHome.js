@@ -3,14 +3,16 @@ import { View, Text, StyleSheet, Image, TouchableOpacity, Alert, ActivityIndicat
 import SelectDropdown from 'react-native-select-dropdown';
 
 const DefaultHome = ({ navigation }) => {
-  const [selectedType, setSelectedType] = useState('');
-  const [selectedLocation, setSelectedLocation] = useState('');
-  const [searchResults, setSearchResults] = useState([]);
-  const [loading, setLoading] = useState(false); // State to track loading status
+  // State variables
+  const [selectedType, setSelectedType] = useState(''); // Stores the selected property type
+  const [selectedLocation, setSelectedLocation] = useState(''); // Stores the selected location
+  const [searchResults, setSearchResults] = useState([]); // Stores the search results
+  const [loading, setLoading] = useState(false); // Tracks loading status during search
 
+  // Function to handle search
   const handleSearch = () => {
+    // Construct the query based on selected type and location
     let constructedQuery = '';
-
     if (selectedType && selectedLocation) {
       constructedQuery = `${selectedType}/${selectedLocation}`;
     } else {
@@ -22,13 +24,16 @@ const DefaultHome = ({ navigation }) => {
       }
     }
 
+    // Validate if type or location is selected
     if (!selectedType && !selectedLocation) {
       Alert.alert('Error', 'Please select a property type or location.');
       return;
     }
 
-    setLoading(true); // Set loading to true when search begins
+    // Set loading to true when search begins
+    setLoading(true);
 
+    // Fetch search results from API
     const endpoint = `https://ebuy-api.onrender.com/properties/${constructedQuery}`;
     fetch(endpoint)
       .then(response => response.json())
@@ -40,16 +45,18 @@ const DefaultHome = ({ navigation }) => {
       .finally(() => setLoading(false)); // Set loading to false when search completes
   };
 
+  // Return the component structure
   return (
     <View style={styles.container}>
-      <Image
-        source={require('./assets/girl.png')}
-        style={styles.backgroundImage}
-      />
+      {/* Background image */}
+      <Image source={require('./assets/girl.png')} style={styles.backgroundImage} />
       <View style={styles.overlay}></View>
+      {/* App logo */}
       <Image source={require('./assets/logo.png')} style={styles.logos} />
       <View style={styles.body}>
+        {/* Search container */}
         <View style={styles.searchContainer}>
+          {/* Dropdown for selecting property type */}
           <SelectDropdown
             data={['', 'Duplex', 'Apartment', 'Ranch', 'Beachfront', 'Mansion', 'Estate']}
             onSelect={(selectedItem, index) => {
@@ -73,6 +80,7 @@ const DefaultHome = ({ navigation }) => {
             showsVerticalScrollIndicator={false}
             dropdownStyle={styles.dropdownMenu}
           />
+          {/* Dropdown for selecting location */}
           <SelectDropdown
             data={['', 'Texas', 'Oklahoma', 'West Virginia', 'Florida', 'Chicago']}
             onSelect={(selectedItem, index) => {
@@ -96,7 +104,9 @@ const DefaultHome = ({ navigation }) => {
             showsVerticalScrollIndicator={false}
             dropdownStyle={styles.dropdownMenu}
           />
+          {/* Search button */}
           <TouchableOpacity style={styles.searchButton} onPress={handleSearch} disabled={loading}>
+            {/* Display loading indicator if search is in progress */}
             {loading ? (
               <ActivityIndicator size="small" color="#ffffff" />
             ) : (
@@ -109,6 +119,7 @@ const DefaultHome = ({ navigation }) => {
   );
 };
 
+// Styles
 const styles = StyleSheet.create({
   container: {
     flex: 1,

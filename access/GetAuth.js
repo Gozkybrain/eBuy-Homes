@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, StyleSheet, ImageBackground, TouchableOpacity, TextInput, Button, Image, Alert, ActivityIndicator } from 'react-native';
 import { initializeApp } from 'firebase/app';
 import { getAuth, initializeAuth, getReactNativePersistence, createUserWithEmailAndPassword, signInWithEmailAndPassword, sendPasswordResetEmail } from 'firebase/auth';
+import { getFirestore, doc, setDoc, getDoc } from 'firebase/firestore';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 // Initialize Firebase app with your Firebase config
@@ -20,6 +21,7 @@ const firebaseApp = initializeApp(firebaseConfig);
 const auth = initializeAuth(firebaseApp, {
   persistence: getReactNativePersistence(AsyncStorage)
 });
+const firestore = getFirestore(firebaseApp);
 
 const GetAuth = ({ navigation }) => {
   // State variables for form inputs, error messages, and mode (login or register)
@@ -41,11 +43,17 @@ const GetAuth = ({ navigation }) => {
   });
   const [loading, setLoading] = useState(false); // State variable for loading animation
 
+  // Function to write user data to Firestore
+  const writeUserDataToFirestore = async (userId, userData) => {
+    try {
+      const docRef = doc(firestore, 'users', userId);
+      await setDoc(docRef, userData);
+      console.log('User data successfully written to Firestore!');
+    } catch (error) {
+      console.error('Error writing user data to Firestore:', error);
+    }
+  };
 
-  // ? DO NOT EDIT
-  const handleSearch = () => {
-    navigation.navigate('HomeScreen');
-  }
   // Function to handle user authentication (login or registration)
   const handleAuthentication = async () => {
     setLoading(true); // Show loading animation
@@ -101,6 +109,15 @@ const GetAuth = ({ navigation }) => {
         } else {
           // Perform email/password registration
           const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+          // Write user data to Firestore after registration
+          const userId = userCredential.user.uid;
+          const userData = {
+            username,
+            email,
+            fullName,
+            gender
+          };
+          writeUserDataToFirestore(userId, userData);
           console.log(email + ' registered successfully!', userCredential.user);
         }
         // Navigate to HomeScreen.js upon successful authentication
@@ -128,12 +145,9 @@ const GetAuth = ({ navigation }) => {
   return (
     <ImageBackground source={require('../assets/black.webp')} style={styles.backgroundImage}>
 
- {/* Logo at top left */}
- <Image source={require('../assets/logo.png')} style={styles.logo} />
-      <TouchableOpacity onPress={handleSearch}>
-        {/* Logo at top left */}
-        <Image source={require('../assets/logo.png')} style={styles.logo} />
-      </TouchableOpacity>
+      {/* Logo at top left */}
+      <Image source={require('../assets/logo.png')} style={styles.logo} />
+
 
       {/* Main Page Content */}
       <View style={styles.container}>
